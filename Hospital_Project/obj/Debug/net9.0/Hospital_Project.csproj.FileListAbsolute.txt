@@ -12,3 +12,4 @@
 /Users/burhanorucov/Documents/RiderProjects/Hospital_Project_First_part/Hospital_Project/obj/Debug/net9.0/Hospital_Project.pdb
 /Users/burhanorucov/Documents/RiderProjects/Hospital_Project_First_part/Hospital_Project/obj/Debug/net9.0/Hospital_Project.genruntimeconfig.cache
 /Users/burhanorucov/Documents/RiderProjects/Hospital_Project_First_part/Hospital_Project/obj/Debug/net9.0/ref/Hospital_Project.dll
+/Users/burhanorucov/Documents/RiderProjects/Hospital_Project_First_part/Hospital_Project/obj/Debug/net9.0/Hospital_Project.sourcelink.json

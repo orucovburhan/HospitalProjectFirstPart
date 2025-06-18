@@ -10,19 +10,20 @@ class Program
 
         while (true)
         {
+            RestartLogin: ;
             Console.Clear();
+            Console.WriteLine("Welcome to the Hospital! Please sign in first.");
             Console.WriteLine("Enter your name:");
             string name = Console.ReadLine();
             Console.WriteLine("Enter your surname:");
             string surname = Console.ReadLine();
             Console.WriteLine("Enter your email:");
-            string email = Console.ReadLine();//email@gmail.com
+            string email = Console.ReadLine(); //email@gmail.com
             Console.WriteLine("Enter your phone number:");
             string phone = Console.ReadLine();
             try
             {
                 User newUser = new User(name, surname, email, phone);
-
             }
             catch (Exception e)
             {
@@ -31,11 +32,15 @@ class Program
                 Thread.Sleep(2000);
                 continue;
             }
-            string[] departments = { hospital.Departments[0].Name, hospital.Departments[1].Name, hospital.Departments[2].Name };
+
+            string[] departments =
+                { hospital.Departments[0].Name, hospital.Departments[1].Name, hospital.Departments[2].Name };
             int selectedDepartmentIndex = 0;
 
             while (true)
             {
+                BackToDepartmentSelection: ;
+
                 Console.Clear();
                 Console.WriteLine("Choose a department:\n");
                 for (int i = 0; i < departments.Length; i++)
@@ -68,7 +73,8 @@ class Program
                 switch (deptKey)
                 {
                     case ConsoleKey.UpArrow:
-                        selectedDepartmentIndex = (selectedDepartmentIndex - 1 + backOptionIndex + 1) % (backOptionIndex + 1);
+                        selectedDepartmentIndex =
+                            (selectedDepartmentIndex - 1 + backOptionIndex + 1) % (backOptionIndex + 1);
                         break;
                     case ConsoleKey.DownArrow:
                         selectedDepartmentIndex = (selectedDepartmentIndex + 1) % (backOptionIndex + 1);
@@ -76,7 +82,7 @@ class Program
                     case ConsoleKey.Enter:
                         if (selectedDepartmentIndex == backOptionIndex)
                         {
-                            break;
+                            goto RestartLogin;
                         }
                         else
                         {
@@ -96,7 +102,6 @@ class Program
                                 Console.Clear();
                                 Console.WriteLine($"Department: {departments[selectedDepartmentIndex]}");
                                 Console.WriteLine("Choose a doctor:\n");
-
                                 for (int i = 0; i < doctors.Count; i++)
                                 {
                                     if (i == selectedDoctorIndex)
@@ -127,7 +132,8 @@ class Program
                                 switch (doctorKey)
                                 {
                                     case ConsoleKey.UpArrow:
-                                        selectedDoctorIndex = (selectedDoctorIndex - 1 + doctorBackIndex + 1) % (doctorBackIndex + 1);
+                                        selectedDoctorIndex = (selectedDoctorIndex - 1 + doctorBackIndex + 1) %
+                                                              (doctorBackIndex + 1);
                                         break;
                                     case ConsoleKey.DownArrow:
                                         selectedDoctorIndex = (selectedDoctorIndex + 1) % (doctorBackIndex + 1);
@@ -144,16 +150,19 @@ class Program
                                             while (true)
                                             {
                                                 Console.Clear();
-                                                Console.WriteLine($"Dr. {doctors[selectedDoctorIndex].Name} {doctors[selectedDoctorIndex].Surname}");
+                                                Console.WriteLine(
+                                                    $"Dr. {doctors[selectedDoctorIndex].Name} {doctors[selectedDoctorIndex].Surname}");
                                                 Console.WriteLine("Choose a time slot:\n");
 
-                                                bool[] available = {
+                                                bool[] available =
+                                                {
                                                     doctors[selectedDoctorIndex].NineToEleven,
                                                     doctors[selectedDoctorIndex].TwelveToThirteen,
                                                     doctors[selectedDoctorIndex].FifteenToSeventeen,
                                                 };
 
-                                                string[] hours = {
+                                                string[] hours =
+                                                {
                                                     $"09:00 - 11:00 - {(available[0] ? "Free" : "Reserved")}",
                                                     $"12:00 - 14:00 - {(available[1] ? "Free" : "Reserved")}",
                                                     $"15:00 - 17:00 - {(available[2] ? "Free" : "Reserved")}",
@@ -186,17 +195,20 @@ class Program
                                                     case ConsoleKey.UpArrow:
                                                         do
                                                         {
-                                                            selectedHourIndex = (selectedHourIndex - 1 + hours.Length) % hours.Length;
-                                                        }
-                                                        while (selectedHourIndex < 3 && !available[selectedHourIndex]);
+                                                            selectedHourIndex = (selectedHourIndex - 1 + hours.Length) %
+                                                                hours.Length;
+                                                        } while (selectedHourIndex < 3 &&
+                                                                 !available[selectedHourIndex]);
+
                                                         break;
 
                                                     case ConsoleKey.DownArrow:
                                                         do
                                                         {
                                                             selectedHourIndex = (selectedHourIndex + 1) % hours.Length;
-                                                        }
-                                                        while (selectedHourIndex < 3 && !available[selectedHourIndex]);
+                                                        } while (selectedHourIndex < 3 &&
+                                                                 !available[selectedHourIndex]);
+
                                                         break;
 
                                                     case ConsoleKey.Enter:
@@ -215,27 +227,28 @@ class Program
                                                                 doctors[selectedDoctorIndex].FifteenToSeventeen = false;
 
                                                             Console.Clear();
-                                                            Console.WriteLine($"Thank you {name} {surname}. You have booked {hours[selectedHourIndex]} with Dr. {doctors[selectedDoctorIndex].Name} {doctors[selectedDoctorIndex].Surname}");
+                                                            Console.WriteLine(
+                                                                $"Thank you {name} {surname}. You have booked {hours[selectedHourIndex]} with Dr. {doctors[selectedDoctorIndex].Name} {doctors[selectedDoctorIndex].Surname}");
                                                             Console.WriteLine("Press any key to return to login...");
                                                             Console.ReadKey(true);
                                                             goto RestartLogin;
                                                         }
+
                                                         break;
                                                 }
                                             }
 
-                                        BackToDoctorSelection:;
+                                            BackToDoctorSelection: ;
                                         }
+
                                         break;
                                 }
                             }
                         }
+
                         break;
                 }
-            BackToDepartmentSelection:;
             }
-
-        RestartLogin:;
         }
     }
 }
