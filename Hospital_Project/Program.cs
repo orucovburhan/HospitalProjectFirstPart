@@ -1,4 +1,4 @@
-﻿using Hospital_Project;
+using Hospital_Project;
 using System;
 using System.Threading;
 
@@ -107,12 +107,12 @@ class Program
                                     if (i == selectedDoctorIndex)
                                     {
                                         Console.ForegroundColor = ConsoleColor.Cyan;
-                                        Console.WriteLine($"> {doctors[i].Name} {doctors[i].Surname}");
+                                        Console.WriteLine($"> {doctors[i].Name} {doctors[i].Surname} - Experience: {doctors[i].ExperienceYear} year");
                                         Console.ResetColor();
                                     }
                                     else
                                     {
-                                        Console.WriteLine($"  {doctors[i].Name} {doctors[i].Surname}");
+                                        Console.WriteLine($"  {doctors[i].Name} {doctors[i].Surname} - Experience: {doctors[i].ExperienceYear} year");
                                     }
                                 }
 
